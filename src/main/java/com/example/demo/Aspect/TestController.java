@@ -1,6 +1,7 @@
 package com.example.demo.Aspect;
 
 
+import com.example.demo.annotation.demoAnnotation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -9,6 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @Slf4j
 public class TestController {
 
+    @demoAnnotation("doNormal")
     @RequestMapping("/doNormal")
     public String doNormal(String name, String age) {
         log.info("【执行方法】：doNormal");

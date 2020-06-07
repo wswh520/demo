@@ -19,7 +19,7 @@ import java.util.Arrays;
 @Slf4j
 public class LogAspect {
         private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
-        @Pointcut("execution(* com.example.demo.Aspect.TestController.doNormal(..))")
+        @Pointcut("@annotation(com.example.demo.annotation.demoAnnotation)")
         public void pointCut(){}
 
         @Before(value = "pointCut()")

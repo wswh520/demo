@@ -11,7 +11,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useUnicode=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true
+    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useUnicode=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: wanghui123
     initialSize: 50
@@ -41,6 +41,10 @@ spring:
         min-idle: 0
         max-active: 8
         max-wait: -1
+
+mybatis:
+  mapper-locations: classpath:mapper/*Mapper.xml
+  type-aliases-package: com.example.demo
 
 # 数据源配置: Map结构,key为DbName字符串,value为详细配置信息
 dataSourceConfigMap:
