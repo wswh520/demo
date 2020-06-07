@@ -59,6 +59,34 @@
             <artifactId>aspectjweaver</artifactId>
         </dependency>
 
+        <!-- 引入 Druid 数据源依赖：https://mvnrepository.com/artifact/com.alibaba/druid -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>druid</artifactId>
+            <version>1.1.9</version>
+        </dependency>
+        <!-- 引入Spring封装的jdbc-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jdbc</artifactId>
+        </dependency>
+        <!--引入mysql连接驱动-->
+        <dependency>
+            <groupId>mysql</groupId>
+            <artifactId>mysql-connector-java</artifactId>
+            <!--执行范围-->
+            <scope>runtime</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+
+
+
+
+
 
 
         <dependency>
@@ -93,6 +121,14 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <!--执行期间,不写这个可能会引起导入mysql连接出错-->
+                        <goals>
+                            <goal>repackage</goal>
+                        </goals>
+                    </execution>
+                </executions>
             </plugin>
         </plugins>
     </build>
