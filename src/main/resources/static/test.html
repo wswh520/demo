@@ -1,45 +1,70 @@
 <!DOCTYPE html>
 <html lang="en" xmlns="http://www.w3.org/1999/html">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
 </head>
 <body>
 <br>
-<form action="/excel2007Export">
-    <input type="submit" value="excel模板下载">
-</form>
-<br>
-<form action="/exportExcel">
-    <input type="submit" value="excel下载-不需要模板">
-</form>
-<br>
-<form action="/textExport">
-    <input type="submit" value="text下载">
-</form>
-<br>
-<form action="/test-set-string">
-    <input name="key" value="壮壮">
-    <input name="value" value="好帅">
-    <input type="submit" value="Redis记录key">
-</form>
-<br>
-<form action="/test-get-string">
-    <input name="key" value="壮壮">
-    <input type="submit" value="Redis获取key">
-</form>
-<br>
-<form action="/user/queryAll">
-    <input type="submit" value="查询所有用户">
-</form>
-<br>
-<form action="/doNormal">
-    <input type="submit" value="切面测试">
-</form>
-<br>
-<form action="/doWithException">
-    <input type="submit" value="切面异常测试">
+
+<form action="/user/formDataModelAndFile" method="post" enctype="multipart/form-data">
+    <input type="text" name="username" value="wh">
+    <input type="text" name="age" value="1">
+    <input type = "file" name = "file" id = "file" />
+    <button type="submit">提交请求</button>
 </form>
 
+
+<form id="uploadForm" enctype = "multipart/form-data">
+    <input type = "file" name = "file" id = "file" />
+    <input type = "button" id = "btnSave" onclick = "uploadSubmit()" value="提交"/>
+</form>
 </body>
+<script>
+    function uploadSubmit() {
+        // var formData = new FormData(document.getElementById('uploadForm'));
+        const postData = new FormData();
+        let checklist = [
+            {
+                username: '2221',
+                age: '88',
+                file: document.getElementById('file').files[0]
+            },
+            {
+                username: '1111',
+                age: '881111',
+                file: document.getElementById('file').files[0]
+            }
+        ];
+        console.log( document.getElementById('file').files[0])
+        for (let i = 0; i < checklist.length; i++) {
+            postData.append("orders[" + i + "].username", checklist[i].username);
+            postData.append("orders[" + i + "].age", checklist[i].age);
+            postData.append("orders[" + i + "].file", checklist[i].file);
+        }
+
+        $.ajax({
+            url: "http://localhost:9090/user/FormDataUser",
+            type: "post",
+            data: postData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log("上传成功");
+            },
+            error: function (a, b, c) {
+                console.log("失败了");
+            },
+            complete: function () {
+                console.log("请求最后处理的方法");
+            },
+        })
+
+        // var request = new XMLHttpRequest();
+        // request.open("POST", "http://localhost:9090/user/FormDataUser")
+        // request.send(postData);
+    }
+</script>
 </html>

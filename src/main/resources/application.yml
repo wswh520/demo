@@ -1,8 +1,19 @@
 server:
-  port: 8080
+  port: 9090
 #  servlet:
 #    #加项目名访问
 #    context-path: /wanghui
+#xxl:
+#  job:
+#    admin:
+#      addresses: http://localhost:8888/xxl-job-admin
+#    executor:
+#      ip:
+#      port: 9999
+#      logpath: /data/applogs/xxl-job/jobhandler
+#      appname: demo-job
+#    accessToken:
+
 spring:
   application:
     name: wanghui
@@ -11,7 +22,7 @@ spring:
   datasource:
     type: com.alibaba.druid.pool.DruidDataSource
     driverClassName: com.mysql.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/test?characterEncoding=utf8&useUnicode=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=Asia/Shanghai
+    url: jdbc:mysql://localhost:3306/wanghui?characterEncoding=utf8&useUnicode=true&useSSL=false&allowMultiQueries=true&zeroDateTimeBehavior=convertToNull&autoReconnect=true&serverTimezone=Asia/Shanghai
     username: root
     password: wanghui123
     initialSize: 50
@@ -41,8 +52,21 @@ spring:
         min-idle: 0
         max-active: 8
         max-wait: -1
+    #配置rabbitMq 服务器
+    rabbitmq:
+      host: 127.0.0.1
+      port: 15672
+      username: guest
+      password: guest
+      #虚拟host 可以不设置,使用server默认host
+      #virtual-host: JCcccHost
+    #确认消息已发送到交换机
+    publisher-confirms: true
+    #确认消息已发送到队列
+    publisher-returns: true
 
 mybatis:
   mapper-locations: classpath:mapper/*Mapper.xml
   type-aliases-package: com.example.demo
+
 

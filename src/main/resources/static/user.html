@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<script src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<form method="post" enctype="multipart/form-data"  id="uploadForm">
+    <input type="text" name="username" value="wh">
+    <input type="number" name="age" value="1" id="age">
+    <input type = "button" id = "btnSave" onclick = "uploadSubmit()" value="提交"/>
+</form>
+
+<script>
+    function uploadSubmit() {
+        var age =document.getElementById("age").value;// 获取输入内容
+        console.log(typeof age);
+        var formData = new FormData(document.getElementById('uploadForm'));
+        console.log(formData);
+        $.ajax({
+            url: "http://localhost:9090/user/formDataModel",
+            type: "post",
+            data: formData,
+            dataType: "json",
+            processData: false,
+            contentType: false,
+            success: function (result) {
+                console.log("上传成功");
+            },
+            error: function (a, b, c) {
+                console.log("失败了");
+            },
+            complete: function () {
+                console.log("请求最后处理的方法");
+            },
+        })
+    }
+</script>
+
+</body>
+</html>

@@ -1,26 +1,47 @@
 package com.example.demo.Thread;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.concurrent.CountDownLatch;
+import lombok.SneakyThrows;
+import org.junit.Test;
+import org.junit.runner.RunWith;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.test.context.junit4.SpringRunner;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
+//@SpringBootTest
+//@RunWith(SpringRunner.class)
+@RestController
 public class ThreadDemo {
 
-    static CountDownLatch cdl;//这里的数字，开启几个线程就写几
-    /**
-     * 实现等待所有子线程结束后再执行一段代码
-     * @param list
-     * @throws InterruptedException
-     */
-    public void counter (List list) throws InterruptedException {
-        cdl = new CountDownLatch(list.size());
-        new Thread(new Runnable(){
-            public void run() {
-                // TODO Auto-generated method stub
-                cdl.countDown();
-            }
-        }).start();
-        cdl.await();//主线程等待子线程执行输出
+    public static void main(String[] args) {
+//        testThread();
+//        runTesy();
     }
+
+//    @Test
+    public static void testThread(){
+        Thread thread = new Thread(){
+            public void run(){
+                System.out.println("Thread Running");
+            }
+        };
+        thread.start();
+    }
+
+    @RequestMapping("runTesy")
+    public String runTesy(){
+        Runnable myRunnable = new Runnable(){
+            @SneakyThrows
+            public void run(){
+                System.out.println("Runnable running");
+                Thread.sleep(2000);
+                System.out.println("Runnable running==================");
+            }
+        };
+        Thread thread = new Thread(myRunnable);
+        thread.start();
+        return "ok";
+    }
+
 
 }

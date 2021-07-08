@@ -10,4 +10,6 @@ public interface UserMapper {
 
     public List<User> queryAll();
 
+    public void addUsers(List<User> list);
+
 }

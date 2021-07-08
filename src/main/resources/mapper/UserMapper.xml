@@ -10,4 +10,13 @@
     <select id="queryAll" resultType="com.example.demo.User.model.User">
         select * from user
     </select>
+    
+    <insert id="addUsers">
+        INSERT INTO user
+        (username,age)
+        VALUE
+        <foreach collection="list" item="it" separator=";" open="" close="">
+            (#{it.username},#{it.age})
+        </foreach>
+    </insert>
 </mapper>
